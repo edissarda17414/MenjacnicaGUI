@@ -1,7 +1,9 @@
 package menjacnica.gui;
 
 import java.awt.EventQueue;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class Kontroler {
@@ -22,6 +24,30 @@ public class Kontroler {
 		JOptionPane.showMessageDialog(gui.getContentPane(), poruka, "Podaci o autoru", JOptionPane.PLAIN_MESSAGE);
 	}
 	
+	public static void izaberiFajl() {
+		JFileChooser fc = new JFileChooser();
+		int izbor = fc.showOpenDialog(gui.getContentPane());
+		
+		if (izbor == JFileChooser.APPROVE_OPTION) {
+			File f = fc.getSelectedFile();
+			
+			String tekst = "Ucitan fajl: " +  f.getAbsolutePath() + System.lineSeparator();
+			gui.getTextArea().append(tekst);
+		}
+	}
+	
+	public static void sacuvajFajl() {
+		JFileChooser fc = new JFileChooser();
+		int izbor = fc.showSaveDialog(gui.getContentPane());
+		
+		if (izbor == JFileChooser.APPROVE_OPTION) {
+			File f = fc.getSelectedFile();
+			
+			String tekst = "Sacuvan fajl: " + f.getAbsolutePath() + System.lineSeparator();
+			gui.getTextArea().append(tekst);
+		}
+		
+	}
 	
 	
 	/**
