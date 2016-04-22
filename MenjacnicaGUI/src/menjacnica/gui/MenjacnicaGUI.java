@@ -186,6 +186,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnDodajKurs() {
 		if (btnDodajKurs == null) {
 			btnDodajKurs = new JButton("Dodaj kurs");
+			btnDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					Kontroler.prikaziDodajKursGui();
+				}
+			});
 			btnDodajKurs.setPreferredSize(new Dimension(150, 30));
 		}
 		return btnDodajKurs;
@@ -215,7 +220,7 @@ public class MenjacnicaGUI extends JFrame {
 		return scrollPaneTabela;
 	}
 
-	private JTable getTable() {
+	public JTable getTable() {
 		if (table == null) {
 			table = new JTable();
 			table.setModel(new DefaultTableModel(new Object[][] {},
@@ -227,6 +232,7 @@ public class MenjacnicaGUI extends JFrame {
 				}
 			});
 			table.setFillsViewportHeight(true);
+			table.getTableHeader().setReorderingAllowed(false);
 			addPopup(table, getPopupMenu());
 		}
 		return table;
@@ -265,6 +271,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmDodajKurs() {
 		if (mntmDodajKurs == null) {
 			mntmDodajKurs = new JMenuItem("Dodaj kurs");
+			mntmDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Kontroler.prikaziDodajKursGui();
+				}
+			});
 		}
 		return mntmDodajKurs;
 	}

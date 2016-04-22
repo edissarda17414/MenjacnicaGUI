@@ -5,10 +5,12 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Kontroler {
 	
 	private static MenjacnicaGUI gui;
+	private static DodajKursGUI dodajKursGui;
 	
 	
 	public static void exit() {
@@ -24,6 +26,11 @@ public class Kontroler {
 		JOptionPane.showMessageDialog(gui.getContentPane(), poruka, "Podaci o autoru", JOptionPane.PLAIN_MESSAGE);
 	}
 	
+	public static void dodajUPoljeZaIspis(String tekst) {
+		gui.getTextArea().append(tekst);
+	}
+	
+	
 	public static void izaberiFajl() {
 		JFileChooser fc = new JFileChooser();
 		int izbor = fc.showOpenDialog(gui.getContentPane());
@@ -32,7 +39,7 @@ public class Kontroler {
 			File f = fc.getSelectedFile();
 			
 			String tekst = "Ucitan fajl: " +  f.getAbsolutePath() + System.lineSeparator();
-			gui.getTextArea().append(tekst);
+			dodajUPoljeZaIspis(tekst);
 		}
 	}
 	
@@ -44,8 +51,49 @@ public class Kontroler {
 			File f = fc.getSelectedFile();
 			
 			String tekst = "Sacuvan fajl: " + f.getAbsolutePath() + System.lineSeparator();
-			gui.getTextArea().append(tekst);
+			dodajUPoljeZaIspis(tekst);
 		}
+		
+	}
+	
+	
+	public static void prikaziDodajKursGui() {
+		if (otvorenDodajKursGui()) {
+			dodajKursGui.toFront();
+			return;
+		}
+		
+		dodajKursGui = new DodajKursGUI();
+		dodajKursGui.setVisible(true);
+		dodajKursGui.setLocationRelativeTo(null);
+	}
+	
+	public static void zatvoriDodajKursGui() {
+		if (dodajKursGui != null) {
+			dodajKursGui.dispose();
+			dodajKursGui = null;
+		}
+	}
+	
+	private static boolean otvorenDodajKursGui() {
+		return (dodajKursGui != null);
+	}
+	
+	public static void dodajKurs(String sifra, String naziv, double prodajniKurs, double kupovniKurs,
+			double srednjiKurs, String skraceniNaziv) {
+
+		String tekst = "Sifra: " + sifra + ", Naziv: " + naziv + 
+				", prodajni kurs: " + prodajniKurs + ", kupovni kurs: " + kupovniKurs + ", srednji kurs: " + srednjiKurs + 
+				", skraceni naziv: " + skraceniNaziv + System.lineSeparator();
+		
+		dodajUPoljeZaIspis(tekst);
+		
+		DefaultTableModel dtm = (DefaultTableModel) gui.getTable().getModel();
+		
+		dtm.addRow(new Object[] {sifra, naziv, prodajniKurs, srednjiKurs, kupovniKurs, skraceniNaziv});
+		dtm.fireTableDataChanged();
+		
+		zatvoriDodajKursGui();
 		
 	}
 	
@@ -65,5 +113,7 @@ public class Kontroler {
 			}
 		});
 	}
+
+	
 
 }
