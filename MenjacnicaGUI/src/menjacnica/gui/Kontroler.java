@@ -11,6 +11,7 @@ public class Kontroler {
 	
 	private static MenjacnicaGUI gui;
 	private static DodajKursGUI dodajKursGui;
+	private static IzvrsiZamenuGUI izvrsiZamenuGui;
 	
 	
 	public static void exit() {
@@ -64,8 +65,9 @@ public class Kontroler {
 		}
 		
 		dodajKursGui = new DodajKursGUI();
-		dodajKursGui.setVisible(true);
 		dodajKursGui.setLocationRelativeTo(null);
+		dodajKursGui.setVisible(true);
+		
 	}
 	
 	public static void zatvoriDodajKursGui() {
@@ -82,7 +84,7 @@ public class Kontroler {
 	public static void dodajKurs(String sifra, String naziv, double prodajniKurs, double kupovniKurs,
 			double srednjiKurs, String skraceniNaziv) {
 
-		String tekst = "Sifra: " + sifra + ", Naziv: " + naziv + 
+		String tekst = "[Dodat kurs] Sifra: " + sifra + ", naziv: " + naziv + 
 				", prodajni kurs: " + prodajniKurs + ", kupovni kurs: " + kupovniKurs + ", srednji kurs: " + srednjiKurs + 
 				", skraceni naziv: " + skraceniNaziv + System.lineSeparator();
 		
@@ -113,6 +115,35 @@ public class Kontroler {
 		}
 	
 	}
+	
+	
+	public static void prikaziIzvrsiZamenuGui() {
+		if (otvorenIzvrsiZamenuGui()) {
+			izvrsiZamenuGui.toFront();
+			return;
+		}
+		
+		izvrsiZamenuGui = new IzvrsiZamenuGUI();
+		izvrsiZamenuGui.setLocationRelativeTo(null);
+		izvrsiZamenuGui.setVisible(true);
+	}
+	
+	public static void zatvoriIzvrsiZamenuGui() {
+		if (otvorenIzvrsiZamenuGui()) {
+			izvrsiZamenuGui.dispose();
+			izvrsiZamenuGui = null;
+		}
+		
+		
+	}
+	
+	private static boolean otvorenIzvrsiZamenuGui() {
+		return (izvrsiZamenuGui != null);
+	}
+	
+	
+	
+	
 	
 	
 	/**

@@ -219,6 +219,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnIzvrsiZamenu() {
 		if (btnIzvrsiZamenu == null) {
 			btnIzvrsiZamenu = new JButton("Izvr\u0161i zamenu");
+			btnIzvrsiZamenu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Kontroler.prikaziIzvrsiZamenuGui();
+				}
+			});
 			btnIzvrsiZamenu.setPreferredSize(new Dimension(150, 30));
 		}
 		return btnIzvrsiZamenu;
@@ -312,6 +317,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmIzvrsiZamenu() {
 		if (mntmIzvrsiZamenu == null) {
 			mntmIzvrsiZamenu = new JMenuItem("Izvr\u0161i zamenu");
+			mntmIzvrsiZamenu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Kontroler.prikaziIzvrsiZamenuGui();
+				}
+			});
 		}
 		return mntmIzvrsiZamenu;
 	}
