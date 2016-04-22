@@ -10,6 +10,8 @@ import java.awt.Toolkit;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.KeyStroke;
@@ -199,6 +201,16 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnIzbrisiKurs() {
 		if (btnIzbrisiKurs == null) {
 			btnIzbrisiKurs = new JButton("Izbri\u0161i kurs");
+			btnIzbrisiKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int red = getTable().getSelectedRow();
+					if (red >= 0) {
+						Kontroler.obrisiKurs(red);
+					} else {
+						JOptionPane.showMessageDialog(getTable(), "Izaberite kurs koji zelite da obrisete !", "Greska pri brisanju", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			});
 			btnIzbrisiKurs.setPreferredSize(new Dimension(150, 30));
 		}
 		return btnIzbrisiKurs;
@@ -283,6 +295,16 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmIzbrisiKurs() {
 		if (mntmIzbrisiKurs == null) {
 			mntmIzbrisiKurs = new JMenuItem("Izbri\u0161i kurs");
+			mntmIzbrisiKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int red = getTable().getSelectedRow();
+					if (red >= 0) {
+						Kontroler.obrisiKurs(red);
+					} else {
+						JOptionPane.showMessageDialog(getTable(), "Izaberite kurs koji zelite da obrisete !", "Greska pri brisanju", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			});
 		}
 		return mntmIzbrisiKurs;
 	}

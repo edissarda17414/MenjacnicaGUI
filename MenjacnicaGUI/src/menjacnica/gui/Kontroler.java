@@ -90,11 +90,28 @@ public class Kontroler {
 		
 		DefaultTableModel dtm = (DefaultTableModel) gui.getTable().getModel();
 		
-		dtm.addRow(new Object[] {sifra, naziv, prodajniKurs, srednjiKurs, kupovniKurs, skraceniNaziv});
-		dtm.fireTableDataChanged();
+		dtm.addRow(new Object[] {sifra, skraceniNaziv, prodajniKurs, srednjiKurs, kupovniKurs, naziv});
 		
 		zatvoriDodajKursGui();
 		
+	}
+	
+	public static void obrisiKurs(int index) {
+		int obrisi = JOptionPane.showConfirmDialog(gui.getContentPane(), "Da li ste sigurni da zelite da obrisete izabrani kurs?", "Potvrda brisanja", JOptionPane.YES_NO_OPTION);
+		
+		if (obrisi == JOptionPane.YES_OPTION) {
+			
+			DefaultTableModel dtm = (DefaultTableModel) gui.getTable().getModel();
+			dtm.removeRow(index);
+			JOptionPane.showMessageDialog(gui.getContentPane(), "Kurs je uspesno obrisan", "Poruka", JOptionPane.INFORMATION_MESSAGE);
+			
+			String tekst = "Izbrisan je red sa indeksom: " + index + System.lineSeparator();
+			dodajUPoljeZaIspis(tekst);
+			
+		} else {
+			JOptionPane.showMessageDialog(gui.getContentPane(), "Kurs nije obrisan", "Poruka", JOptionPane.ERROR_MESSAGE);
+		}
+	
 	}
 	
 	
